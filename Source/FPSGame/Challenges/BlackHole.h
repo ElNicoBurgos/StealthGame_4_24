@@ -4,38 +4,40 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "ObjectiveActor.generated.h"
+#include "BlackHole.generated.h"
 
 class USphereComponent;
-class UParticleSystem;
+class UStaticMeshComponent;
 
 UCLASS()
-class FPSGAME_API AObjectiveActor : public AActor
+class FPSGAME_API ABlackHole : public AActor
 {
 	GENERATED_BODY()
 	
-private: 
+private:
+
 	UPROPERTY(VisibleAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* MeshComp;
 
 	UPROPERTY(VisibleAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	USphereComponent* SphereComp;
+	USphereComponent* InnerSphereComponent;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Effects", meta = (AllowPrivateAccess = "true"))
-	UParticleSystem* PickUpParticle;
+	UPROPERTY(VisibleAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	USphereComponent* OutSphereComponent;
 
-	void PlayEfects();
-
+	UFUNCTION()
+	void OverlapInnerSphere(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 public:	
 	// Sets default values for this actor's properties
-	AObjectiveActor();
+	ABlackHole();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 
-	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 };
