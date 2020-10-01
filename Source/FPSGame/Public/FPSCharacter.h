@@ -12,12 +12,17 @@ class UCameraComponent;
 class AFPSProjectile;
 class USoundBase;
 class UAnimSequence;
-
+class UPawnNoiseEmitterComponent;
 
 UCLASS()
 class AFPSCharacter : public ACharacter
 {
 	GENERATED_BODY()
+
+private:
+	
+	UPROPERTY(VisibleAnywhere, Category="AI", meta = (AllowPrivateAccess = "true"))
+	UPawnNoiseEmitterComponent* NoiseEmitterComponent;
 
 protected:
 

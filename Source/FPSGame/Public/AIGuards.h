@@ -17,6 +17,13 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UPawnSensingComponent* PawnSensingComp;
 
+	//ADD UFUNCION BECAUSE IT IS A DELEGATE
+	UFUNCTION()
+	void OnSeenPawn(APawn* SeenPawn);
+
+	UFUNCTION()
+	void OnNoiseHeard(APawn* NoiseInstigator, const FVector& Location, float Volume);
+
 public:
 	// Sets default values for this character's properties
 	AAIGuards();
